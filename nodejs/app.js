@@ -2,14 +2,15 @@ const express=require('express')
 const mongoose=require('mongoose')
 const port=process.env.port||3000;
 ////require for routes
+var dbConn=require('./Config_files/dbconfig')
 var indexRouter = require('./routes/index');
 var catalogRouter = require('./routes/catalog');
 var kitchenRoutes=require('./routes/kitchenRoute')
 const app=express()
 
 mongoose
-  .connect("mongodb://localhost:27017/mumApp")
-  // .connect("mongodb://dbadmin:mongo@12@ds018258.mlab.com:18258/instanonymous")
+  //.connect("mongodb://localhost:27017/mumApp")
+   .connect(dbConn.dataURL)
   .then(() => {
     console.log("Connected to database!");
   })
