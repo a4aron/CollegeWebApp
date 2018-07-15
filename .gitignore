@@ -1,2 +1,4 @@
 nodejs/node_modules
 nodejs/Config_files
+angular/src/backendserver/config.js
+angular/node_modules
