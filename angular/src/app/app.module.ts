@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http"
 import { MatInputModule,
         MatCardModule, 
         MatButtonModule, 
         MatToolbarModule,
         MatExpansionModule,
-        MatSelectModule } from '@angular/material';
+        MatSelectModule, 
+        MatProgressSpinnerModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { NewsListComponent } from './news/news-list/news-list.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
@@ -34,7 +37,8 @@ import { NewsListComponent } from './news/news-list/news-list.component';
     MatToolbarModule,
     MatExpansionModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,19 +9,17 @@ import { NewsService } from "../news.service";
     styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit, OnDestroy {
-    // news = [
-    //     {title : 'First News', content : 'First News Component'},
-    //     {title : 'Second News', content : 'Second News Component'},
-    //     {title : 'Third News', content : 'Third News Component'}
-    // ]
     news: News[] = [];
+    isLoading = false;
     private newsSub: Subscription;
     constructor(public newsService: NewsService) {
 
     }
     ngOnInit() {
+        this.isLoading = true;
         this.newsService.getNews();
         this.newsSub = this.newsService.getNewsUpdateListener().subscribe((news: News[]) => {
+            this.isLoading = false;
             this.news = news;
         });
     }

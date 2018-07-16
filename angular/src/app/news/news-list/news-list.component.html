@@ -1,11 +1,12 @@
-<mat-accordion multi="true" *ngIf="news.length > 0">
+<mat-spinner *ngIf = "isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="news.length > 0 && !isLoading">
     <mat-expansion-panel *ngFor="let mynews of news">
         <mat-expansion-panel-header>
             {{mynews.category}}
         </mat-expansion-panel-header>
         <p>{{mynews.content}}</p>
         <mat-action-row>
-            <button mat-button color="primary">EDIT</button>
+            <a mat-button color="primary" [routerLink]="['/edit', mynews.id]">EDIT</a>
             <button mat-button color = "warn" (click)="onDelete(mynews.id)">DELETE</button>
         </mat-action-row>
     </mat-expansion-panel>
