@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http"
+import {HttpClientModule} from '@angular/common/http';
 import { MatInputModule,
-        MatCardModule, 
-        MatButtonModule, 
+        MatCardModule,
+        MatButtonModule,
         MatToolbarModule,
         MatExpansionModule,
         MatSelectModule } from '@angular/material';
@@ -15,6 +15,7 @@ import { NewsCreateComponent } from './news/news-create/news-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NewsListComponent } from './news/news-list/news-list.component';
     AppComponent,
     NewsCreateComponent,
     HeaderComponent,
-    NewsListComponent
+    NewsListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
