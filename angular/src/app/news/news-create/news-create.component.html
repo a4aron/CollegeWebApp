@@ -1,0 +1,27 @@
+<!-- <textarea rows = "3" [value] = "newNews" #newsInput></textarea> -->
+<mat-card>
+    <form (submit)="onAddNews(newsForm)" #newsForm="ngForm">
+
+        <mat-form-field>
+            <mat-select mat-Input name="category" #category="ngModel" ngModel placeholder="Select the Category" required>
+                <mat-option value="Lost and Found">Lost and Found</mat-option>
+                <mat-option value="Buy and Sell">Buy and Sell</mat-option>
+                <mat-option value="Housing">Housing</mat-option>
+                <mat-option value="Ride sharing">Ride sharing</mat-option>
+                <mat-option value="News Feed">News Feed</mat-option>
+            </mat-select>
+            <mat-error *ngIf="category.invalid">*Please select the category</mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field>
+            <input matInput type="text" name="title" #title="ngModel" ngModel required>
+            <mat-error *ngIf="title.invalid">*Please enter the news title</mat-error>
+        </mat-form-field> -->
+        <mat-form-field>
+            <textarea matInput rows="3" placeholder="News Content" name="content" #content="ngModel" ngModel required></textarea>
+            <mat-error *ngIf="content.invalid">*Please enter the news content</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Save News</button>
+    </form>
+
+</mat-card>
