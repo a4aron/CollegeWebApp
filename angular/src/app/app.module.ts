@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from "@angular/common/http"
 import { MatInputModule,
         MatCardModule,
         MatButtonModule,
         MatToolbarModule,
         MatExpansionModule,
-        MatSelectModule } from '@angular/material';
+        MatSelectModule,
+        MatProgressSpinnerModule} from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { LoginComponent } from './auth/login/login.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
@@ -36,7 +39,8 @@ import { LoginComponent } from './auth/login/login.component';
     MatToolbarModule,
     MatExpansionModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

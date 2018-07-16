@@ -9,7 +9,7 @@ var kitchenRoutes=require('./routes/kitchenRoute')
 const app=express()
 
 mongoose
-  //.connect("mongodb://localhost:27017/mumApp")
+  //.connect("mongodb://localhost:27017/YourDbName")//for local
    .connect(dbConn.dataURL)
   .then(() => {
     console.log("Connected to database!");
@@ -27,5 +27,4 @@ app.use(express.urlencoded({extended:true}))
 
 
 app.use("/api/kitchen",kitchenRoutes)
-//app.use('/catalog', catalogRouter); 
 app.listen(port,()=>console.log("Listening at port..."+port))
