@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { News } from '../news.model'
-import { NewsService } from "../news.service";
+import { News } from '../news.model';
+import { NewsService } from '../news.service';
 
 @Component({
     selector: 'app-news-list',
@@ -27,7 +27,7 @@ export class NewsListComponent implements OnInit, OnDestroy {
         this.newsSub.unsubscribe();
     }
 
-    onDelete(newsId : string){
+    onDelete(newsId: string) {
         this.newsService.deletePost(newsId);
     }
 
