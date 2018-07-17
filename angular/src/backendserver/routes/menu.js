@@ -5,9 +5,11 @@ const Menus = require('../models/menu');
 
 //GET Request for Menu
 router.get('/menu', (req, res, next) => {
+    console.log(Date.now())
+    
     Menus.find().then((mymenus) => {
         res.status(200).json({
-            message: 'News Fetched',
+            message: 'Menus Fetched',
             menus: mymenus
         })
 
@@ -16,7 +18,6 @@ router.get('/menu', (req, res, next) => {
 
 ///POST request for Menu
 router.post('/menu', function (req, res, next) {
-console.log("from post in backend");
     var menuItem = new Menus({
        // date: Date.now(),
         menuDayName: req.body.menuDayName,
@@ -29,15 +30,22 @@ console.log("from post in backend");
     console.log(menuItem)
     menuItem.save().then(createdNews => {
         res.status(201).json({
-        message: "News added Successfully",
+        message: "Menu added Successfully",
         newsId : createdNews._id
         })
     })
 })
 
 router.delete('/menu/:menuId',(req,res,next)=>{
-    Menus.deleteOne({ _id: req.params.menuId }).then(result => console.log(result));
-    res.status(200).json({ message: 'menus Deleted' });
+    Menus.deleteOne({ _id: req.params.menuId }).then(
+        result => {
+            if(result.n > 0 ) {
+             res.status(200).json({ message: 'menus Deleted' });
+            } else {
+             res.status(500).json({ message: 'Delete Error' });
+            }
+        }
+    );
 })
 
 module.exports = router;
