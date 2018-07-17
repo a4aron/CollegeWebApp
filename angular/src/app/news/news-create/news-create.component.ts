@@ -40,7 +40,6 @@ export class NewsCreateComponent implements OnInit {
         this.form.value.image
       );
     }
-
     this.form.reset();
   }
   // image picker
