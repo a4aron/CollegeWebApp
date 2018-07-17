@@ -3,4 +3,5 @@ export interface News {
     category: string;
     content: string;
     imagePath: string;
+    creator: string;
 }
