@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
+const check_Auth = require('../middleware/check-auth')
 
 //POST Request
-router.post("/news", (req, res, next) => {
+router.post("/news", check_Auth, (req, res, next) => {
     const news = new News({
         category: req.body.category,
         content: req.body.content
@@ -27,13 +28,13 @@ router.get('/news', (req, res, next) => {
     });
 });
 //DELETE Request
-router.delete("/news/:id", (req, res, next) => {
+router.delete("/news/:id", check_Auth, (req, res, next) => {
     News.deleteOne({ _id: req.params.id }).then(result => console.log(result));
     res.status(200).json({ message: 'News Deleted' });
 })
 
 //Update Request
-router.put("/news/:id",(req, res, next)=>{
+router.put("/news/:id", check_Auth, (req, res, next)=>{
     const news = new News({
         _id : req.body.id,
         category: req.body.category,

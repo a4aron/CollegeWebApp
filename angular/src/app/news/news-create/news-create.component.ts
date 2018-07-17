@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NewsService } from '../news.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { News } from '../news.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-news-create',
