@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http"
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 import { MatInputModule,
         MatCardModule,
         MatButtonModule,
@@ -18,6 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -26,12 +27,14 @@ import { AppRoutingModule } from './app-routing.module';
     NewsCreateComponent,
     HeaderComponent,
     NewsListComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,

@@ -1,5 +1,5 @@
-export interface News{
-    id: string,
-    category : string,
-    content : string
+export interface News {
+    id: string;
+    category: string;
+    content: string;
 }
