@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +14,7 @@ export class NewsService {
     private newsUpdated = new Subject<News[]>();
 
     constructor(private http: HttpClient, public router: Router) {}
-        // this.http.get<{ message: string, news: News[] }>("http://localhost:3000/api/news")
-        //     .subscribe((newsData) => {
-        //         this.news = newsData.news;
-        //         this.newsUpdated.next([...this.news]);
-        //     });
-    
+         
     getNews() {
         this.http.get<{ message: string, news: any }>(
             "http://localhost:3000/api/news"
@@ -29,7 +25,8 @@ export class NewsService {
                     return {
                         category : news.category,
                         content : news.content,
-                        id : news._id
+                        id : news._id,
+                        imagePath : news.imagePath
                     }
                 })
             })
@@ -44,26 +41,53 @@ export class NewsService {
         return this.newsUpdated.asObservable();
     }
     getTheNews(id: string) {
-        return this.http.get<{ _id: string; category: string; content: string }>(
+        return this.http.get<{ _id: string; category: string; content: string, imagePath: string}>(
           'http://localhost:3000/api/news/'+ id);
       }
-    addNews(category: string, content: string) {
-        const mynews: News = { id: null, category: category, content: content };
-        this.http.post<{ message: string,  newsId : string }>('http://localhost:3000/api/news', mynews)
-            .subscribe((responseData) => { //only called if success 
-                const id = responseData.newsId;
-                mynews.id = id;
+    addNews(category: string, content: string, image: File) {
+        console.log(image+ "--------------");
+       
+        const newsData = new FormData();
+        newsData.append("category", category);
+        newsData.append("content", content);
+        newsData.append("image", image, category);
+
+        this.http.post<{ message: string,  news : News }>('http://localhost:3000/api/news', newsData)
+            .subscribe((responseData) => { //only called if success
+                const mynews : News ={id: responseData.news.id, category: category, content: content, imagePath: responseData.news.imagePath}; 
                 this.news.push(mynews);
                 this.newsUpdated.next([...this.news]);
                 this.router.navigate(["/"]);
             });
     }
-    updateNews(id: string, category: string, content: string){
-        const news: News = {id: id, category: category, content:content};
-        this.http.put('http://localhost:3000/api/news/'+ id, news)
+    updateNews(id: string, category: string, content: string, image: File | string){
+        let newsData: News | FormData;
+        if(typeof (image) === 'object'){
+            newsData = new FormData();
+            newsData.append("id", id);
+            newsData.append("category", category);
+            newsData.append("content", content);
+            newsData.append("image", image, category);
+        }
+        else{
+            newsData = {
+                id:id,
+                category:category,
+                content: content,
+                imagePath:image
+            };
+        }
+
+        this.http.put('http://localhost:3000/api/news/'+ id, newsData)
         .subscribe(response => {
             const updatedNews = [...this.news];
-            const oldNewsIndex = updatedNews.findIndex(p => p.id === news.id);
+            const oldNewsIndex = updatedNews.findIndex(p => p.id === id);
+            const news: News = {
+                id:id,
+                category:category,
+                content: content,
+                imagePath: ""
+            }
             updatedNews[oldNewsIndex] = news;
             this.news = updatedNews;
             this.newsUpdated.next([...this.news]); 
@@ -80,4 +104,7 @@ export class NewsService {
            this.newsUpdated.next([...this.news]);
         })
     }
+
+
+   
 }

@@ -1,17 +1,48 @@
 const express = require('express');
-const router = express.Router();
+const multer = require('multer');
+
 const News = require('../models/news');
 
+const router = express.Router();
+const MIME_TYPE_MAP = {
+    'image/png' : 'png',
+    'image/jpeg' : 'jpg',
+    'image/jpg' : 'jpg'
+}
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback)=>{
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        let error = new Error("Invalid type");
+        if(isValid){
+            error = null; 
+        }
+        callback(null, "backendserver/images");
+    },
+    filename: (req, file, callback)=>{
+       const name = file.originalname.toLowerCase().split(' ').join('-');
+       const ext = MIME_TYPE_MAP[file.mimetype];
+       callback(null, name + '-'+ Date.now() + '.' + ext);
+    }
+});
+
 //POST Request
-router.post("/news", (req, res, next) => {
+router.post("/news", multer({storage: storage}).single("image") , (req, res, next) => {
+    const url = req.protocol +  '://' + req.get("host");
     const news = new News({
         category: req.body.category,
-        content: req.body.content
+        content: req.body.content,
+        imagePath: url + "/images/" + req.file.filename
     })
     news.save().then(createdNews => {
         res.status(201).json({
         message: "News added Successfully",
-        newsId : createdNews._id
+        news:{
+            id: createdNews._id,
+            category: createdNews.category,
+            content: createdNews.content,
+            imagePath: createdNews.imagePath
+        }
         })
     })
 })
@@ -32,12 +63,18 @@ router.delete("/news/:id", (req, res, next) => {
     res.status(200).json({ message: 'News Deleted' });
 })
 
-//Update Request
-router.put("/news/:id",(req, res, next)=>{
+//UPDATE Request
+router.put("/news/:id", multer({storage: storage}).single("image") ,(req, res, next)=>{
+    let imagePath = req.body.imagePath;
+    if(req.file){
+        const url = req.protocol +  '://' + req.get("host");
+        imagePath = url + "/images/" + req.file.filename
+    }
     const news = new News({
         _id : req.body.id,
         category: req.body.category,
-        content : req.body.content
+        content : req.body.content,
+        imagePath: imagePath
     })
     News.updateOne({_id: req.params.id}, news).then(result => {
         res.status(200).json({message : 'Update successful'});
