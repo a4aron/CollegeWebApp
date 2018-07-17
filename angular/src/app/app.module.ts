@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http"
 import { MatInputModule,
         MatCardModule,
@@ -18,6 +18,9 @@ import { HeaderComponent } from './header/header.component';
 import { NewsListComponent } from './news/news-list/news-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { MenuComponent } from './kitchen/menu/menu.component';
+import { MenuListComponent } from './kitchen/menu-list/menu-list.component';
+import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-item/menu-session-item.component';
 
 
 @NgModule({
@@ -26,11 +29,15 @@ import { AppRoutingModule } from './app-routing.module';
     NewsCreateComponent,
     HeaderComponent,
     NewsListComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent,
+    MenuListComponent,
+    MenuSessionItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,

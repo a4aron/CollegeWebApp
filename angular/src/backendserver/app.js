@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const mongodburl = require ('./config.js')
 var cors = require('cors')
 const newsRoutes = require('./routes/news')
+const menuRoutes=require('./routes/menu')
 const app = express();
 
 
@@ -22,4 +23,5 @@ mongoose
     });
 
 app.use("/api",newsRoutes);
+app.use("/api",menuRoutes)
 module.exports = app;
