@@ -4,6 +4,10 @@
         <mat-expansion-panel-header>
             {{mynews.category}}
         </mat-expansion-panel-header>
+        <div class="news-image">
+            <img [src]="mynews.imagePath" [alt]="mynews.category">
+        </div>
+
         <p>{{mynews.content}}</p>
         <mat-action-row *ngIf="userIsAuthenticated">
             <a mat-button color="primary" [routerLink]="['/edit', mynews.id]">EDIT</a>
@@ -11,4 +15,4 @@
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="news.length <= 0">No News Yet !!!</p>
+<p class="info-text mat-body-1" *ngIf="news.length <= 0 && !isLoading">No News Yet !!!</p>

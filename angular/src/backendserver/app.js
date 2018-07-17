@@ -1,12 +1,12 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
-const mongodburl = require ('./config.js')
+const mongodburl = require ('./config')
 var cors = require('cors')
 const newsRoutes = require('./routes/news')
 const userRoutes = require('./routes/user')
-
+const menuRoutes=require('./routes/menu')
 const app = express();
-app.set('x-powered-by', false);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +23,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use("/images", express.static(path.join("backendserver/images")));
+
+app.set('x-powered-by', false);
 
 mongoose
     .connect(mongodburl.mongodburl)
@@ -35,4 +38,5 @@ mongoose
 
 app.use("/api",newsRoutes);
 app.use("/api/user",userRoutes);
+app.use("/api",menuRoutes)
 module.exports = app;

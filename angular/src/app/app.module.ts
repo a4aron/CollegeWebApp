@@ -20,6 +20,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { MenuComponent } from './kitchen/menu/menu.component';
+import { MenuListComponent } from './kitchen/menu-list/menu-list.component';
+import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-item/menu-session-item.component';
 
 
 @NgModule({
@@ -29,11 +32,15 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     HeaderComponent,
     NewsListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MenuComponent,
+    MenuListComponent,
+    MenuSessionItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
