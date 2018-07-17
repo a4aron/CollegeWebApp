@@ -36,7 +36,7 @@ mongoose
         console.log("Connection failed!");
     });
 
-app.use("/api",newsRoutes);
+app.use("/api/news",newsRoutes);
 app.use("/api/user",userRoutes);
 app.use("/api",menuRoutes)
 module.exports = app;

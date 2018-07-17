@@ -78,7 +78,8 @@ export class NewsCreateComponent implements OnInit {
             id: newsData._id,
             category: newsData.category,
             content: newsData.content,
-            imagePath: newsData.imagePath
+            imagePath: newsData.imagePath,
+            creator: newsData.creator
           };
           this.form.setValue({
             category: this.news.category,
