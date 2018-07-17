@@ -12,6 +12,7 @@ import { AuthService } from '../../auth/auth.service';
 export class NewsListComponent implements OnInit, OnDestroy {
   news: News[] = [];
   isLoading = false;
+  userId: string;
   userIsAuthenticated = false;
   private newsSub: Subscription;
   private authStatusSub: Subscription;
@@ -21,6 +22,7 @@ export class NewsListComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit() {
     this.isLoading = true;
+    this.userId = this.authService.getUserId();
     this.newsService.getNews();
     this.newsSub = this.newsService
       .getNewsUpdateListener()
@@ -32,6 +34,7 @@ export class NewsListComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.userId = this.authService.getUserId();
         this.userIsAuthenticated = isAuthenticated;
       });
   }

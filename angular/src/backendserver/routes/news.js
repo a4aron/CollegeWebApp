@@ -28,12 +28,13 @@ const storage = multer.diskStorage({
 });
 
 //POST Request
-router.post("/news", multer({storage: storage}).single("image") , (req, res, next) => {
+router.post("", check_Auth, multer({storage: storage}).single("image") , (req, res, next) => {
     const url = req.protocol +  '://' + req.get("host");
     const news = new News({
         category: req.body.category,
         content: req.body.content,
-        imagePath: url + "/images/" + req.file.filename
+        imagePath: url + "/images/" + req.file.filename,
+        creator: req.userData.userId
     })
     news.save().then(createdNews => {
         res.status(201).json({
@@ -42,14 +43,15 @@ router.post("/news", multer({storage: storage}).single("image") , (req, res, nex
             id: createdNews._id,
             category: createdNews.category,
             content: createdNews.content,
-            imagePath: createdNews.imagePath
+            imagePath: createdNews.imagePath,
+            creator: req.userData.userId
         }
         })
     })
 })
 
 //GET Request
-router.get('/news', (req, res, next) => {
+router.get('', (req, res, next) => {
     News.find().then((mynews) => {
         res.status(200).json({
             message: 'News Fetched',
@@ -59,13 +61,21 @@ router.get('/news', (req, res, next) => {
     });
 });
 //DELETE Request
-router.delete("/news/:id", check_Auth, (req, res, next) => {
-    News.deleteOne({ _id: req.params.id }).then(result => console.log(result));
-    res.status(200).json({ message: 'News Deleted' });
+// also check if creator is the user id who created post
+router.delete("/:id", check_Auth, (req, res, next) => {
+    News.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
+      console.log(result);
+      //n is the property of results that gives how many document were updated
+      if (result.n > 0) {
+        res.status(200).json({ message: "News Deleted!" });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
 })
 
 //UPDATE Request
-router.put("/news/:id", multer({storage: storage}).single("image") ,(req, res, next)=>{
+router.put("/:id", check_Auth, multer({storage: storage}).single("image") ,(req, res, next)=>{
     let imagePath = req.body.imagePath;
     if(req.file){
         const url = req.protocol +  '://' + req.get("host");
@@ -75,14 +85,21 @@ router.put("/news/:id", multer({storage: storage}).single("image") ,(req, res, n
         _id : req.body.id,
         category: req.body.category,
         content : req.body.content,
-        imagePath: imagePath
+        imagePath: imagePath,
+        creator: req.userData.userId
     })
-    News.updateOne({_id: req.params.id}, news).then(result => {
-        res.status(200).json({message : 'Update successful'});
+    // also check if creator is the user id who created post
+    News.updateOne({_id: req.params.id, creator: req.userData.userId}, news).then(result => {
+      //nModified is the property of results that gives how many document were updated
+      if (result.nModified > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
     })
 })
 //GET according to id
-router.get('/news/:id', (req,res,next) => {
+router.get('/:id', (req,res,next) => {
     News.findById(req.params.id).then(news => {
         if(news){
             res.status(200).json(news);

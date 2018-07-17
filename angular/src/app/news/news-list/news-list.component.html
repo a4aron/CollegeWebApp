@@ -9,7 +9,7 @@
         </div>
 
         <p>{{mynews.content}}</p>
-        <mat-action-row *ngIf="userIsAuthenticated">
+        <mat-action-row *ngIf="userIsAuthenticated && userId === mynews.creator">
             <a mat-button color="primary" [routerLink]="['/edit', mynews.id]">EDIT</a>
             <button mat-button color = "warn" (click)="onDelete(mynews.id)">DELETE</button>
         </mat-action-row>

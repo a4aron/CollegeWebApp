@@ -35,16 +35,14 @@ export class MenuService {
                 this.menusUpdated.next([...this.menus]);
 
             });
-        //return [...this.menus]; // copying and making a new array
     }
     getmenusUpdateListener() {
         return this.menusUpdated.asObservable();
     }
 
 
-
+/////////service to add Menu 
     addMenu(dayName:string,items:any) {
-        console.log("menu server")
         const newMenu: Menu = {  _id:null,menuDayName: dayName, items: items };
         this.http.post<{ message: string,  menuId : string }>('http://localhost:3000/api/menu', newMenu)
             .subscribe((responseData) => { //only called if success 
@@ -53,13 +51,12 @@ export class MenuService {
             });
     }
 
-
+//////service to delete menu
     deleteMenu(menuId : string){
-        console.log("from delete service")
         this.http.delete('http://localhost:3000/api/menu/'+ menuId)
         .subscribe(()=>{
            const menusUpdated = this.menus.filter(myMenu =>
-              myMenu._id!=menuId
+              myMenu.id!==menuId
            )
            this.menus = menusUpdated;
            this.menusUpdated.next([...this.menus]);
@@ -71,5 +68,3 @@ export class MenuService {
 
 
 
-
-///////post menu

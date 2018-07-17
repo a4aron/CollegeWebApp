@@ -18,25 +18,28 @@ export class MenuListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.menuService.getmenus();
-    this.menuSub = this.menuService.getmenusUpdateListener().subscribe((menu: Menu[]) => {
+    this.menuSub = this.menuService.getmenusUpdateListener()
+    .subscribe((menu: Menu[]) => {
         this.isLoading = false;
         this.menus = menu;
-      console.log(this.menus)
+      console.log("this is updates :");
+      console.log(this.menus);
     });
 
   }
+
 
 
   remove(menuId){
     if(!isNullOrUndefined(menuId)){
 
       this.menuService.deleteMenu(menuId);
-      this.menuSub = this.menuService.getmenusUpdateListener().subscribe((menu: Menu[]) => {
-        this.isLoading = false;
-        this.menus = menu;
-      console.log(this.menus)
-    });
+     
     }
+  }
+
+  ngOnDestroy(){
+    this.menuSub.unsubscribe();
   }
 
 }
