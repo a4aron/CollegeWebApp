@@ -32,12 +32,16 @@ router.post(
         })
         .catch(err => {
           res.status(500).json({
-            error: err
+            message: "Invalid authentication credentials!"
           });
         });
+    })
+    .catch(err => {
+      res.status(500).json({
+        message: "Some Problem occurred !"
+      });
     });
-  }
-);
+  });
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
