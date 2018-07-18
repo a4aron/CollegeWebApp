@@ -26,6 +26,7 @@ import { MenuListComponent } from './kitchen/menu-list/menu-list.component';
 import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-item/menu-session-item.component';
 import { EventsComponent } from './Events/events/events.component';
 import {FullCalendarModule} from 'ng-fullcalendar'
+import { EventService } from './Events/events.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import {FullCalendarModule} from 'ng-fullcalendar'
     FullCalendarModule,
     MatDividerModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
