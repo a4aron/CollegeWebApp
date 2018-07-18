@@ -1,20 +1,30 @@
 <mat-spinner *ngIf = "isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="news.length > 0 && !isLoading">
-    <mat-expansion-panel *ngFor="let mynews of news">
-        <mat-expansion-panel-header>
-            {{mynews.category}}
-        </mat-expansion-panel-header>
-        <div class="news-image">
-            <img [src]="mynews.imagePath" [alt]="mynews.category">
-        </div>
-
-        <p>{{mynews.content}}</p>
-        <mat-action-row *ngIf="userIsAuthenticated && userId === mynews.creator">
-            <a mat-button color="primary" [routerLink]="['/edit', mynews.id]">EDIT</a>
-            <button mat-button color = "warn" (click)="onDelete(mynews.id)">DELETE</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-</mat-accordion>
-<p class="info-text mat-body-1" *ngIf="news.length <= 0 && !isLoading">No News Yet !!!</p>
-
+<mat-card class="example-card" *ngIf="news.length > 0 && !isLoading" >
+<mat-card class="sub-card" *ngFor="let mynews of news">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>John Wick</mat-card-title>
+      <mat-card-subtitle>  {{mynews.category}} </mat-card-subtitle>
+      <mat-select class="action" *ngIf="userIsAuthenticated && userId === mynews.creator">
+            <mat-option>
+                <a mat-button color="primary" [routerLink]="['/edit', mynews.id]"><span class="glyphicon glyphicon-pencil fullwidth"></span></a>
+            </mat-option>
+            <mat-option>
+                <button mat-button color = "warn" (click)="onDelete(mynews.id)"><span class="glyphicon glyphicon-trash fullwidth"></span></button>
+            </mat-option>
+      </mat-select>
+    </mat-card-header>
+    <img  mat-card-image  [src]="mynews.imagePath" [alt]="mynews.category">
+    <mat-card-content>
+      <p>
+        {{mynews.content}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card>
+  <p class="info-text mat-body-1" *ngIf="news.length <= 0 && !isLoading">No News Yet !!!</p>
 

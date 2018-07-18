@@ -8,6 +8,7 @@ import { MatInputModule,
         MatToolbarModule,
         MatExpansionModule,
         MatSelectModule,
+        MatDividerModule,
         MatProgressSpinnerModule} from '@angular/material';
 
 
@@ -51,7 +52,8 @@ import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-ite
     MatExpansionModule,
     MatSelectModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
