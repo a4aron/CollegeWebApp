@@ -38,5 +38,5 @@ mongoose
 
 app.use("/api/news",newsRoutes);
 app.use("/api/user",userRoutes);
-app.use("/api",menuRoutes)
+app.use("/api/menu",menuRoutes)
 module.exports = app;

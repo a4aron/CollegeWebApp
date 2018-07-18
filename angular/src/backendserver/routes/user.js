@@ -4,28 +4,40 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
-
-router.post("/signup", (req, res, next) => {
-  bcrypt.hash(req.body.password, 10).then(hash => {
-    const user = new User({
-      email: req.body.email,
-      password: hash
-    });
-    user
-      .save()
-      .then(result => {
-        res.status(201).json({
-          message: "User created!",
-          result: result
-        });
-      })
-      .catch(err => {
-        res.status(500).json({
-          error: err
-        });
+router.post(
+  "/signup",
+  (req, res, next) => {
+    var email = req.body.email;
+    var splitted = email.match("^(.+)@mum.com$");
+    if (splitted == null) {
+      res.status(500).json({
+        error: "Email not MUM"
       });
-  });
-});
+    }
+    next();
+  },
+  (req, res, next) => {
+    bcrypt.hash(req.body.password, 10).then(hash => {
+      const user = new User({
+        email: req.body.email,
+        password: hash
+      });
+      user
+        .save()
+        .then(result => {
+          res.status(201).json({
+            message: "User created!",
+            result: result
+          });
+        })
+        .catch(err => {
+          res.status(500).json({
+            error: err
+          });
+        });
+    });
+  }
+);
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;

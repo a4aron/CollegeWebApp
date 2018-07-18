@@ -4,9 +4,9 @@ const router = express.Router();
 const Menus = require('../models/menu');
 
 //GET Request for Menu
-router.get('/menu', (req, res, next) => {
+router.get('/', (req, res, next) => {
     console.log(Date.now())
-    
+
     Menus.find().then((mymenus) => {
         res.status(200).json({
             message: 'Menus Fetched',
@@ -17,7 +17,7 @@ router.get('/menu', (req, res, next) => {
 });
 
 ///POST request for Menu
-router.post('/menu', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var menuItem = new Menus({
        // date: Date.now(),
         menuDayName: req.body.menuDayName,
@@ -36,7 +36,7 @@ router.post('/menu', function (req, res, next) {
     })
 })
 
-router.delete('/menu/:menuId',(req,res,next)=>{
+router.delete('/:menuId',(req,res,next)=>{
     Menus.deleteOne({ _id: req.params.menuId }).then(
         result => {
             if(result.n > 0 ) {
