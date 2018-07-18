@@ -7,6 +7,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './auth/auth.guard';
 import { MenuListComponent } from './kitchen/menu-list/menu-list.component';
 import { MenuComponent } from './kitchen/menu/menu.component';
+import { EventsComponent } from './Events/events/events.component';
 
 const routes: Routes = [
     {path : '', component : NewsListComponent},
@@ -16,6 +17,8 @@ const routes: Routes = [
     {path : 'signup', component : SignupComponent},
     { path: 'kitchen', component: MenuListComponent },
     { path: 'createMenu', component: MenuComponent },
+    { path: 'calendar', component: EventsComponent },
+    // {path : 'kitchen/edit/:id', component : MenuComponent},
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
