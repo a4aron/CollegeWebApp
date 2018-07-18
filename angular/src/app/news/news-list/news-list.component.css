@@ -15,3 +15,28 @@ mat-spinner{
     width: 100%;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 }
+
+.example-card {
+    max-width: 600px;
+    margin: auto;
+  }
+  .sub-card{
+      margin-top: 20px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://tse4.mm.bing.net/th?id=OIP.kSaUXlasRsYmA1p6JaV-5QHaJK&pid=Api');
+    background-size: cover;
+  }
+  mat-select {
+    position: absolute;  
+    right: 0;  
+    top: 5;
+    max-width: 150px;
+  }
+  mat-select mat-option {
+      width: 35px;
+  }
+  mat-option * {
+      width: 100%;
+  }

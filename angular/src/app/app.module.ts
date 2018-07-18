@@ -8,6 +8,7 @@ import { MatInputModule,
         MatToolbarModule,
         MatExpansionModule,
         MatSelectModule,
+        MatDividerModule,
         MatProgressSpinnerModule} from '@angular/material';
 
 
@@ -54,7 +55,8 @@ import {FullCalendarModule} from 'ng-fullcalendar'
     MatSelectModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    FullCalendarModule
+    FullCalendarModule,
+    MatDividerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

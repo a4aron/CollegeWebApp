@@ -11,3 +11,12 @@ ul {
 .spacer {
   flex: 1 1 auto;
 }
+
+.mum-color{
+  background-color: green;
+  color: #CCC;
+}
+.example-header-image {
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/5/56/Maharishi_University_of_Management_logo_1.jpg');
+  background-size: cover;
+}
