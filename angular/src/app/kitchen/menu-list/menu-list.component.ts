@@ -22,8 +22,7 @@ export class MenuListComponent implements OnInit {
     .subscribe((menu: Menu[]) => {
         this.isLoading = false;
         this.menus = menu;
-      console.log("this is updates :");
-      console.log(this.menus);
+
     });
 
   }

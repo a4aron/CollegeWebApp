@@ -56,7 +56,7 @@ export class MenuService {
         this.http.delete('http://localhost:3000/api/menu/'+ menuId)
         .subscribe(()=>{
            const menusUpdated = this.menus.filter(myMenu =>
-              myMenu.id!==menuId
+              myMenu._id!==menuId
            )
            this.menus = menusUpdated;
            this.menusUpdated.next([...this.menus]);

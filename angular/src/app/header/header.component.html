@@ -8,9 +8,12 @@
       <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Post</a>
     </li>
     <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/calendar" routerLinkActive="mat-accent">Events</a>
+  </li>
+    <li *ngIf="userIsAuthenticated">
         <a mat-button routerLink="/kitchen" routerLinkActive="mat-accent">Kitchen</a>
     </li>
-    <li *ngIf="userIsAuthenticated">
+    <li *ngIf="userIsAuthenticated" >
         <a mat-button routerLink="/createMenu" routerLinkActive="mat-accent">Add Menu</a>
     </li>
     <li *ngIf="!userIsAuthenticated">

@@ -23,7 +23,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { MenuComponent } from './kitchen/menu/menu.component';
 import { MenuListComponent } from './kitchen/menu-list/menu-list.component';
 import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-item/menu-session-item.component';
-
+import { EventsComponent } from './Events/events/events.component';
+import {FullCalendarModule} from 'ng-fullcalendar'
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-ite
     SignupComponent,
     MenuComponent,
     MenuListComponent,
-    MenuSessionItemComponent
+    MenuSessionItemComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { MenuSessionItemComponent } from './kitchen/SessionItem/menu-session-ite
     MatExpansionModule,
     MatSelectModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FullCalendarModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]

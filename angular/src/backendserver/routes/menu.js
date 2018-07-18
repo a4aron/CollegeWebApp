@@ -5,7 +5,6 @@ const Menus = require('../models/menu');
 
 //GET Request for Menu
 router.get('/menu', (req, res, next) => {
-    console.log(Date.now())
     
     Menus.find().then((mymenus) => {
         res.status(200).json({

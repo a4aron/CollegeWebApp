@@ -5,12 +5,13 @@
   <mat-expansion-panel *ngFor="let m of menus">
       <mat-expansion-panel-header>
         
-         <span style="float: left;"> {{m.menuDayName}}</span><span style="float: right;">HeroHonda</span>
+         <span style="float: left;"> {{m.menuDayName}}</span>
       </mat-expansion-panel-header>
       <p>{{m.created_by_userName}}
         <br> <span *ngFor="let item of m.items">
           <strong>{{item.session}}</strong><br>
           {{item.menuList}}<br></span>
+          <!-- <button class="pull-right btn btn-primary" [routerLink]="['/kitchen/edit', m.id]">Edit</button> -->
           <button class="pull-right btn btn-danger" (click)="remove(m.id)">Delete</button>
       </p>
      

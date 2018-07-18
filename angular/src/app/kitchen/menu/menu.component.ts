@@ -25,6 +25,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this._fb.group({
+  //  index: [{value: null, disabled:true}],
       menuDayName: ['', [Validators.required, Validators.minLength(5)]],
       items: this._fb.array([
           this.initItem(),
@@ -33,7 +34,7 @@ export class MenuComponent implements OnInit {
   }
 
   initItem() {
-    // initialize our address
+    // initialize our items
     return this._fb.group({
         session: ['', Validators.required],
         menuList: ['']
@@ -41,13 +42,13 @@ export class MenuComponent implements OnInit {
 }
 
 addItem() {
-// add address to the list
+// add items to the list
 const control = <FormArray>this.myForm.controls['items'];
 control.push(this.initItem());
 }
 
 removeItem(i: number) {
-// remove address from the list
+// remove items from the list
 const control = <FormArray>this.myForm.controls['items'];
 control.removeAt(i);
 }
